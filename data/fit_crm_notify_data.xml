@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="fit_crm_notify_mail" model="mail.template">
+            <field name="name">Contact Form Notification</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="email_from">${object.company_id and object.company_id.email}</field>
+            <field name="email_to">info@fundament.it</field>
+            <field name="email_cc"/>
+            <field name="subject">[${object.company_id and object.company_id.name}] Ingevuld contact formulier</field>
+            <field name="body_html"> <![CDATA[
+
+<div summary="o_mail_notification" style="padding: 0px; width:600px;">
+<table cellspacing="0" cellpadding="0" border="0" style="width: 600px; margin-top: 5px;">
+<tbody><tr>
+    <td valign="center" style=" 0px 0px 0px;">
+        <a href="/web?id=${object.id}#id=${object.id}&view_type=form&model=crm.lead" style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #006699; border: 0px solid #006699; border-radius:3px" data-original-title="" title="">Weergave Lead</a>
+    </td>
+    <td valign="center" align="right" style=" 0px 0px 0px;">
+        <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}" data-original-title="" title="">
+    </td>
+</tr>
+<tr>
+    <td colspan="2" style=" 0px 0px 0px;text-align:center;">
+        <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:10px 0;">
+    </td>
+</tr>
+</tbody></table>
+</div>
+<p>Via uw website is zojuist het contact formulier ingevuld.</p>
+<p>Er is hiervoor een verkoop 'Lead' aangemaakt, klik op de 'Weergave Lead' knop om deze te openen.</p>
+<br>
+<p>De contact formulier details:</p>
+<br><p>- Onderwerp: ${object.name}</p><p>- Naam: ${object.contact_name}</p><p>- Vraag: ${object.description}<br></p><br>
+        ]]></field>
+        </record>
+
+    </data>
+</odoo>
